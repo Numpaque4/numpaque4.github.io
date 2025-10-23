@@ -8,7 +8,7 @@ permalink: /cv.html
 # Sebastian Numpaque - Curriculum Vitae
 
 ## About Me
-Undergraduate student in Astronomy at the University of Antioquia. Young Researcher Intern in the FACom and SEAP research groups, focusing on exoplanetary science.  Coordinator and Co-founder of the Astrophysics Research Training Program. Organizational Manager at AstrodidaXis Foundation for Astronomy Education. I have made contributions in the design and development of scientific and computational tools, as well as in the publication of scientific papers and organization of science outreach activities.
+Undergraduate student in Astronomy at the University of Antioquia. Young Researcher Intern in the FACom and SEAP research groups, focusing on exoplanetary science.  Coordinator and Co-founder of the Astronomy Research Seedbed for students. Organizational Manager at AstrodidaXis Foundation for Astronomy Education. I have made contributions in the design and development of scientific and computational tools, as well as in the publication of scientific papers and organization of science outreach activities.
 
 ## Contact
 - **Email**: \[david.rodriguez1@udea.edu.co\]
@@ -18,6 +18,8 @@ Undergraduate student in Astronomy at the University of Antioquia. Young Researc
 
 ## Education
 - **Astronomy Undergraduate Programme**, University of Antioquia, Medellín, Colombia — *2021 – Present*
+    
+    - *Recognition for Outstanding Advanced Student in the Astronomy Program, 2025*
 
 ### Complementary Courses
 - Exoplanets (University of Geneva - Coursera, 2024)  
@@ -50,13 +52,19 @@ Undergraduate student in Astronomy at the University of Antioquia. Young Researc
 - Coordination of initiatives to strengthen the foundation’s visibility and impact.
 - Impact of local communities in Boyacá
 
+### RECA Mentorship Program, Colombian Astronomy Students Network (RECA) | 2025
+- Management of the Call for Applications
+- Planning of Panels and Activities
+- Communication and Promotion
+- Organizing Comitte Member, RECA Mentorship Node
+
 ## Featured Projects
 
 ### Pryngles
 Co-developed a Python package for simulating exoplanet transit light curves, supporting research in exoplanetary science.  
 [Project Link](https://github.com/seap-udea/pryngles)
 
-### Astrophysics Research Training Program
+### Astronomy Research Seedbed
 Co-founded and coordinates a training program for undergraduate students in astrophysics research, focusing on computational, communication, and scientific skills.
 
 ### Offered Workshops and Courses
@@ -78,6 +86,7 @@ Co-founded and coordinates a training program for undergraduate students in astr
 
 ### Organizer Comitte’s Member
 - II & III Workshop on Astronomy Education. OAE - Colombia, AstrodidaXis, UPTC | 2023, 2025
+- RECA Mentorship Program - Colombian Astronomy Students Network (RECA) | 2025 
 
 ## Publications
  - Artificial Intelligence in the Teaching of Natural Sciences on the Threshold of the Fifth Industrial Revolution. Explainable AI for Education: Recent Trends and Challenges. 2024 | Book chapter. DOI: 10.1007/978-3-031-72410-7_9

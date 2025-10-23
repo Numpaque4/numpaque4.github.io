@@ -8,7 +8,7 @@ permalink: /cv.html
 
 ## Sobre mí
 
-Estudiante de pregrado en Astronomía en la Universidad de Antioquia. Joven Investigador dentro de los grupos de investigación FACom (Física y Astrofísica Computacional) y SEAP (Solar, Earth and Planetary Physics), con enfoque en ciencia exoplanetaria. Coordinador y cofundador del Semillero de Formación en Investigación en Astrofísica. Gestor organizacional en la Fundación AstrodidaXis para la Educación en Astronomía. He contribuido en el diseño y desarrollo de paquetería y software científico, así como en la publicación de artículos científicos junto con la organización y ejecución de actividades y eventos de divulgación científica.
+Estudiante de pregrado en Astronomía en la Universidad de Antioquia. Joven Investigador dentro de los grupos de investigación FACom (Física y Astrofísica Computacional) y SEAP (Solar, Earth and Planetary Physics), con enfoque en ciencia exoplanetaria. Coordinador y cofundador del Semillero de Formación en Investigación en Astronomia. Gestor organizacional en la Fundación AstrodidaXis para la Educación en Astronomía. He contribuido en el diseño y desarrollo de paquetería y software científico, así como en la publicación de artículos científicos junto con la organización y ejecución de actividades y eventos de divulgación científica.
 
 ## Contacto
 
@@ -19,6 +19,8 @@ Estudiante de pregrado en Astronomía en la Universidad de Antioquia. Joven Inve
 
 ## Educación
 - **Pregrado en Astronomía**, Universidad de Antioquia, Medellín, Colombia — *2021 – Presente*
+    
+    - *Distinción de Reconocimiento a Mejor Estudiante Avanzado en Astronomía, 2025*
 
 ### Cursos Complementarios
 - Exoplanets (University of Geneva - Coursera, 2024)  
@@ -52,14 +54,21 @@ Estudiante de pregrado en Astronomía en la Universidad de Antioquia. Joven Inve
 - Coordinación de iniciativas para fortalecer el posicionamiento de la fundación
 - Impacto de comunidades locales en Boyacá
 
+### RECA Mentorship Program, Red de Estudiantes Colombianos en Astronomia (RECA) | 2025
+- Comunicación y Promoción
+- Gestión de la Convocatoria
+- Planificación de Paneles y Actividades
+- Miembro del Comité Organizador, Nodo RECA Mentores
+
+
 ## Proyectos Destacados
 
 ### Pryngles
 Co-desarrollador de un paquete en Python para la simulación de curvas de luz de tránsitos exoplanetarios, apoyando la investigación en ciencia exoplanetaria.  
 [Enlace al proyecto](https://github.com/seap-udea/pryngles)
 
-### Semillero de Formación en Investigación en Astrofísica
-Cofundador y coordinador de un programa de formación para estudiantes de pregrado en investigación astrofísica, enfocado en habilidades computacionales, comunicativas y científicas.
+### Semillero de Formación en Investigación en Astronomia
+Cofundador y coordinador de un programa de formación en investigación astrofísica para estudiantes de pregrado, enfocado en habilidades computacionales, comunicativas y científicas.
 
 ### Cursos y Talleres Ofrecidos
 - Explorando Mundos Distantes: Detección de Exoplanetas y la Zona Habitable
