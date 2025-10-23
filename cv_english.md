@@ -75,10 +75,12 @@ Co-founded and coordinates a training program for undergraduate students in astr
 - AstrodidaXis Young Course on Astrophysics | 2025
 
 ### Speaker
+- **XXI Encuentro Nacional de Astronomia RAC 2025**
+    - *Fortaleciendo la Formación Investigativa en Astronomía: El Primer Semillero de Investigación de la Universidad de Antioquia*
 - **VIII Congreso Colombiano de Astronomía y Astrofísica (CoCoA) 2024** 
     - *A Python Package for Modelling the Photometric Signatures of Exoplanetary Rings/Satellites* 
 - **III Congreso Internacional de Educación Ambiental Comunitaria 2024**
-    - *Explorando la Contribución de la Astronomía a los Objetivos de Desarrollo Sostenible y el Empoderamiento Comunitario en Boyacá
+    - *Explorando la Contribución de la Astronomía a los Objetivos de Desarrollo Sostenible y el Empoderamiento Comunitario en Boyacá*
 
 ### Assistant 
 - VII Congreso Colombiano de Astronomía y Astrofísica (CoCoA) | 2022
