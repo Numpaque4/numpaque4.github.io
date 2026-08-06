@@ -1,0 +1,18 @@
+---
+import { personal } from '../data/personal';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <p>© {year} {personal.publicName} — CC-BY-SA 4.0</p>
+</footer>
+
+<style>
+  .site-footer {
+    text-align: center;
+    padding: var(--space-6) var(--space-5) var(--space-8);
+    font-size: var(--text-sm);
+    color: var(--color-fg-subtle);
+  }
+</style>

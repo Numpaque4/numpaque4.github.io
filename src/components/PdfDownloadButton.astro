@@ -1,0 +1,64 @@
+---
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="pdf-download">
+  <a class="pdf-download__primary" data-pdf-academic={`/cv/cv-academic-${lang}.pdf`} data-pdf-industry={`/cv/cv-industry-${lang}.pdf`} href={`/cv/cv-academic-${lang}.pdf`} download>
+    {t.downloadCv}
+  </a>
+  <a class="pdf-download__secondary" data-pdf-academic={`/cv/cv-academic-${lang}.pdf`} data-pdf-industry={`/cv/cv-industry-${lang}.pdf`} href={`/cv/cv-industry-${lang}.pdf`} download>
+    {t.downloadOtherVariant}
+  </a>
+</div>
+
+<script>
+  function sync() {
+    const mode = document.documentElement.dataset.mode || 'academic';
+    document.querySelectorAll<HTMLAnchorElement>('.pdf-download__primary').forEach((a) => {
+      a.href = mode === 'academic' ? a.dataset.pdfAcademic! : a.dataset.pdfIndustry!;
+    });
+    document.querySelectorAll<HTMLAnchorElement>('.pdf-download__secondary').forEach((a) => {
+      a.href = mode === 'academic' ? a.dataset.pdfIndustry! : a.dataset.pdfAcademic!;
+    });
+  }
+  sync();
+  document.querySelectorAll('.mode-switch__btn').forEach((btn) => btn.addEventListener('click', () => setTimeout(sync, 0)));
+</script>
+
+<style>
+  .pdf-download {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .pdf-download__primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    padding: 0.65rem 1.1rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+  }
+
+  .pdf-download__primary:hover {
+    background: var(--color-accent-strong);
+  }
+
+  .pdf-download__secondary {
+    font-size: var(--text-sm);
+    color: var(--color-fg-muted);
+    text-decoration: underline;
+  }
+</style>

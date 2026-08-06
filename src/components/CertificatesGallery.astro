@@ -1,0 +1,86 @@
+---
+import { certifications } from '../data/certifications';
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const categoryLabel = {
+  en: { workshop: 'Workshop', course: 'Course', conference: 'Conference', award: 'Award' },
+  es: { workshop: 'Taller', course: 'Curso', conference: 'Congreso', award: 'Reconocimiento' },
+} as const;
+
+const sorted = [...certifications].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
+---
+
+<ul class="certs">
+  {sorted.map((cert) => (
+    <li class="certs__item">
+      <div class="certs__main">
+        <p class="certs__title">{cert.title[lang]}</p>
+        <p class="certs__meta">
+          {cert.issuer[lang]}{cert.year ? ` · ${cert.year}` : ''}
+          <span class="certs__badge">{categoryLabel[lang][cert.category]}</span>
+          {!cert.verified && <span class="certs__unverified">{t.certificationsUnverified}</span>}
+        </p>
+      </div>
+      <a class="certs__link" href={cert.file} target="_blank" rel="noopener noreferrer">{t.certificationsCta} ↗</a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .certs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .certs__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-3);
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .certs__title {
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+
+  .certs__meta {
+    font-size: var(--text-sm);
+    color: var(--color-fg-subtle);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .certs__badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.1rem 0.5rem;
+  }
+
+  .certs__unverified {
+    font-size: 0.7rem;
+    color: var(--color-warning);
+  }
+
+  .certs__link {
+    flex-shrink: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+</style>

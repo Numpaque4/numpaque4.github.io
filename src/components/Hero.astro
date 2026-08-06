@@ -1,0 +1,127 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../assets/photo.jpg';
+import { personal, tagline, aboutMe } from '../data/personal';
+import { useTranslations, type Lang } from '../i18n/ui';
+import PdfDownloadButton from './PdfDownloadButton.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<header class="hero" id="top">
+  <div class="hero__photo">
+    <Image src={photo} alt={personal.publicName} width={180} height={180} />
+  </div>
+
+  <div class="hero__content">
+    <h1>{personal.publicName}</h1>
+    <p class="hero__tagline">
+      <span data-audience="academic" class="hero__tagline-mode">{tagline.academic[lang]}</span>
+      <span data-audience="industry" class="hero__tagline-mode">{tagline.industry[lang]}</span>
+    </p>
+    <p class="hero__about">{aboutMe[lang]}</p>
+
+    <ul class="hero__contact">
+      <li><a href={`mailto:${personal.email}`}>{t.contactEmail}</a></li>
+      <li><a href={personal.github} target="_blank" rel="noopener noreferrer">{t.contactGithub}</a></li>
+      <li><a href={personal.orcid} target="_blank" rel="noopener noreferrer">{t.contactOrcid}</a></li>
+      <li><a href={personal.linkedin} target="_blank" rel="noopener noreferrer">{t.contactLinkedin}</a></li>
+    </ul>
+
+    <div class="hero__pdf">
+      <PdfDownloadButton lang={lang} />
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: var(--space-8) var(--space-5) var(--space-7);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-7);
+  }
+
+  .hero__photo :global(img) {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    object-position: 50% 25%;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+  }
+
+  .hero__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hero h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .hero__tagline {
+    margin: var(--space-2) 0 var(--space-4);
+    font-size: var(--text-lg);
+    color: var(--color-accent);
+    font-family: var(--font-serif);
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .hero__tagline-mode {
+    display: block;
+  }
+
+  :root[data-mode='academic'] .hero__tagline-mode[data-audience='industry'],
+  :root[data-mode='industry'] .hero__tagline-mode[data-audience='academic'] {
+    font-size: var(--text-sm);
+    font-style: normal;
+    color: var(--color-fg-subtle);
+    opacity: 1;
+  }
+
+  .hero__about {
+    max-width: var(--content-width);
+    color: var(--color-fg-muted);
+  }
+
+  .hero__contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin-bottom: var(--space-5);
+  }
+
+  .hero__contact a {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: var(--space-6);
+    }
+
+    .hero__contact {
+      justify-content: center;
+    }
+
+    .hero__pdf {
+      display: flex;
+      justify-content: center;
+    }
+  }
+</style>

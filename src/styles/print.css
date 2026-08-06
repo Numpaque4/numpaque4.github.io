@@ -1,0 +1,44 @@
+@media print {
+  :root {
+    --color-bg: #ffffff;
+    --color-bg-raised: #ffffff;
+    --color-fg: #000000;
+    --color-fg-muted: #333333;
+    --color-fg-subtle: #555555;
+    --color-border: #cccccc;
+    --color-accent: #1f2c4a;
+  }
+
+  nav,
+  .site-nav,
+  .mode-switch,
+  .theme-toggle,
+  .lang-switcher,
+  .pdf-download,
+  .skip-link {
+    display: none !important;
+  }
+
+  a[href]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.75em;
+    color: var(--color-fg-subtle);
+  }
+
+  a[href^='#']::after,
+  a[href^='mailto']::after {
+    content: '';
+  }
+
+  [data-audience] {
+    opacity: 1 !important;
+  }
+
+  body {
+    font-size: 11pt;
+  }
+
+  section {
+    break-inside: avoid-page;
+  }
+}

@@ -1,0 +1,124 @@
+---
+import { useTranslations, type Lang } from '../i18n/ui';
+import type { ExperienceEntry } from '../data/types';
+import ProjectGallery from './ProjectGallery.astro';
+
+interface Props {
+  entry: ExperienceEntry;
+  lang: Lang;
+}
+const { entry, lang } = Astro.props;
+const t = useTranslations(lang);
+const style = `--order-academic:${entry.weight.academic}; --order-industry:${entry.weight.industry};`;
+
+function formatDate(d: string) {
+  if (d === 'present') return t.present;
+  return d.split('-')[0];
+}
+---
+
+<article class="entry" style={style} data-audience={entry.audience === 'both' ? undefined : entry.audience}>
+  <div class="entry__meta">
+    <span class="entry__dates">{formatDate(entry.startDate)}–{formatDate(entry.endDate)}</span>
+  </div>
+  <div class="entry__main">
+    <h3 class="entry__role">{entry.role[lang]}</h3>
+    <p class="entry__org">
+      {entry.org[lang]}{entry.location ? <span class="entry__location"> · {entry.location[lang]}</span> : null}
+    </p>
+    {entry.summary && <p class="entry__summary">{entry.summary[lang]}</p>}
+    <ul class="entry__bullets">
+      {entry.bullets.map((b) => <li>{b[lang]}</li>)}
+    </ul>
+    {entry.gallery && entry.gallery.length > 0 && <ProjectGallery items={entry.gallery} lang={lang} />}
+    {!entry.gallery && entry.links && entry.links.length > 0 && (
+      <p class="entry__links">
+        {entry.links.map((link) => (
+          <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label[lang]} ↗</a>
+        ))}
+      </p>
+    )}
+  </div>
+</article>
+
+<style>
+  .entry {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: var(--space-5);
+    padding-block: var(--space-4);
+    order: var(--order-academic);
+  }
+
+  :root[data-mode='industry'] .entry {
+    order: var(--order-industry);
+  }
+
+  .entry + .entry {
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .entry__dates {
+    font-size: var(--text-sm);
+    color: var(--color-fg-subtle);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .entry__role {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-1);
+  }
+
+  .entry__org {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-3);
+  }
+
+  .entry__location {
+    color: var(--color-fg-subtle);
+    font-weight: 400;
+  }
+
+  .entry__summary {
+    color: var(--color-fg-muted);
+  }
+
+  .entry__bullets li {
+    position: relative;
+    padding-left: var(--space-4);
+    margin-bottom: var(--space-2);
+    color: var(--color-fg-muted);
+    font-size: var(--text-sm);
+  }
+
+  .entry__bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .entry__links {
+    margin-top: var(--space-2);
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .entry__links a {
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    .entry {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+  }
+</style>

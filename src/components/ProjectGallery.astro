@@ -1,0 +1,118 @@
+---
+import type { ProjectLink } from '../data/types';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  items: ProjectLink[];
+  lang: Lang;
+}
+const { items, lang } = Astro.props;
+---
+
+<ul class="project-gallery">
+  {items.map((item) => (
+    <li class="project-card">
+      <a class="project-card__link" href={item.href} target="_blank" rel="noopener noreferrer">
+        <div class="project-card__header">
+          {item.icon && <span class="project-card__icon" aria-hidden="true">{item.icon}</span>}
+          <span class="project-card__name">{item.name}</span>
+          <span class="project-card__arrow" aria-hidden="true">↗</span>
+        </div>
+        <div class="project-card__badges">
+          {item.badges.map((b) => <span class="project-card__badge">{b}</span>)}
+        </div>
+        <p class="project-card__description">{item.description[lang]}</p>
+        {item.meta && <p class="project-card__meta">{item.meta}</p>}
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .project-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-3);
+    margin: var(--space-3) 0 var(--space-2);
+  }
+
+  .project-card {
+    order: initial;
+  }
+
+  .project-card__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    transition: border-color var(--duration-fast) var(--easing), box-shadow var(--duration-fast) var(--easing), transform var(--duration-fast) var(--easing);
+  }
+
+  .project-card__link:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+  }
+
+  .project-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .project-card__icon {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .project-card__name {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+  }
+
+  .project-card__arrow {
+    margin-left: auto;
+    color: var(--color-fg-subtle);
+    font-size: 0.8rem;
+  }
+
+  .project-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: var(--space-2);
+  }
+
+  .project-card__badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.1rem 0.5rem;
+    color: var(--color-fg-muted);
+  }
+
+  .project-card__description {
+    font-size: var(--text-sm);
+    color: var(--color-fg-muted);
+    margin-bottom: var(--space-2);
+    flex: 1;
+  }
+
+  .project-card__meta {
+    font-size: 0.72rem;
+    color: var(--color-fg-subtle);
+    font-family: var(--font-sans);
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+import type { SectionMeta } from '../data/types';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  section: SectionMeta;
+  lang: Lang;
+}
+const { section, lang } = Astro.props;
+const style = `--order-academic:${section.weight.academic}; --order-industry:${section.weight.industry};`;
+---
+
+<section id={section.id} class="cv-section" style={style} data-hide-in-mode={section.hideInMode}>
+  <h2 class="cv-section__heading">{section.heading[lang]}</h2>
+  <div class="cv-section__body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .cv-section {
+    order: var(--order-academic);
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: var(--space-6) var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  :root[data-mode='industry'] .cv-section {
+    order: var(--order-industry);
+  }
+
+  :root[data-mode='academic'] .cv-section[data-hide-in-mode='academic'],
+  :root[data-mode='industry'] .cv-section[data-hide-in-mode='industry'] {
+    display: none;
+  }
+
+  .cv-section__heading {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-5);
+  }
+
+  .cv-section__body {
+    max-width: var(--content-width);
+    display: flex;
+    flex-direction: column;
+  }
+</style>

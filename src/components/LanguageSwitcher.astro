@@ -1,0 +1,41 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const enUrl = getRelativeLocaleUrl('en', '/');
+const esUrl = getRelativeLocaleUrl('es', '/');
+---
+
+<div class="lang-switcher" role="group" aria-label="Language / Idioma">
+  <a href={enUrl} aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
+  <span aria-hidden="true">·</span>
+  <a href={esUrl} aria-current={lang === 'es' ? 'page' : undefined}>ES</a>
+</div>
+
+<style>
+  .lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .lang-switcher a {
+    color: var(--color-fg-muted);
+    text-decoration: none;
+    padding: 0.25rem 0.35rem;
+  }
+
+  .lang-switcher a[aria-current='page'] {
+    color: var(--color-accent);
+  }
+
+  .lang-switcher span {
+    color: var(--color-border);
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+import { languages } from '../data/languages';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<ul class="languages">
+  {languages.map((l) => (
+    <li>
+      <span class="languages__name">{l.name[lang]}</span>
+      <span class="languages__level">{l.level[lang]}</span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .languages {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .languages li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .languages__name {
+    font-weight: 600;
+  }
+
+  .languages__level {
+    font-size: var(--text-sm);
+    color: var(--color-fg-subtle);
+  }
+</style>

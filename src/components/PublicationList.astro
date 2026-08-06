@@ -1,0 +1,91 @@
+---
+import { publications } from '../data/publications';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const statusLabel = {
+  en: { published: 'Published', 'in-prep': 'In preparation', submitted: 'Submitted' },
+  es: { published: 'Publicado', 'in-prep': 'En preparación', submitted: 'Enviado' },
+} as const;
+
+function authorList(authors: typeof publications[number]['authors']) {
+  return authors.map((a) => (a.isSelf ? `${a.name}` : a.name)).join(', ');
+}
+---
+
+<ul class="pub-list">
+  {publications.map((pub) => (
+    <li class="pub" data-audience={pub.audience === 'both' ? undefined : pub.audience}>
+      <p class="pub__authors" set:html={authorList(pub.authors).replace(/(Numpaque[^,]*)/g, '<strong>$1</strong>')} />
+      <p class="pub__title">{pub.title[lang]}</p>
+      <p class="pub__venue">
+        {pub.venue[lang]} · {pub.year}
+        <span class="pub__status">{statusLabel[lang][pub.status]}</span>
+      </p>
+      {(pub.doi || pub.url) && (
+        <p class="pub__link">
+          {pub.doi && <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener noreferrer">DOI: {pub.doi} ↗</a>}
+          {pub.url && <a href={pub.url} target="_blank" rel="noopener noreferrer">PDF ↗</a>}
+        </p>
+      )}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .pub-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .pub {
+    padding-bottom: var(--space-4);
+    border-bottom: 1px dashed var(--color-border);
+  }
+
+  .pub:last-child {
+    border-bottom: none;
+  }
+
+  .pub__authors {
+    font-size: var(--text-sm);
+    color: var(--color-fg-muted);
+    margin-bottom: var(--space-1);
+  }
+
+  .pub__title {
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+
+  .pub__venue {
+    font-size: var(--text-sm);
+    color: var(--color-fg-subtle);
+    font-style: italic;
+  }
+
+  .pub__status {
+    display: inline-block;
+    margin-left: var(--space-2);
+    font-style: normal;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-accent);
+  }
+
+  .pub__link {
+    margin-top: var(--space-1);
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .pub__link a {
+    font-size: var(--text-sm);
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+import { technical } from '../data/technical';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<div class="tech-list">
+  {technical.map((entry) => (
+    <article
+      class="tech-card"
+      style={`--order-academic:${entry.weight.academic}; --order-industry:${entry.weight.industry};`}
+      data-audience={entry.audience === 'both' ? undefined : entry.audience}
+    >
+      <h3 class="tech-card__title">{entry.title[lang]}</h3>
+      <p class="tech-card__description">{entry.description[lang]}</p>
+      <ul class="tech-card__highlights">
+        {entry.highlights.map((h) => <li>{h}</li>)}
+      </ul>
+    </article>
+  ))}
+</div>
+
+<style>
+  .tech-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .tech-card {
+    order: var(--order-academic);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px dashed var(--color-border);
+  }
+
+  :root[data-mode='industry'] .tech-card {
+    order: var(--order-industry);
+  }
+
+  .tech-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .tech-card__title {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2);
+  }
+
+  .tech-card__description {
+    color: var(--color-fg-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .tech-card__highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tech-card__highlights li {
+    font-size: var(--text-sm);
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    color: var(--color-fg-muted);
+  }
+</style>

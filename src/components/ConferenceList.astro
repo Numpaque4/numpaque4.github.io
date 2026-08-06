@@ -1,0 +1,81 @@
+---
+import { conferences } from '../data/conferences';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const roleLabel = {
+  en: { speaker: 'Speaker', assistant: 'Assistant' },
+  es: { speaker: 'Ponente', assistant: 'Asistente' },
+} as const;
+
+const speakers = conferences.filter((c) => c.role === 'speaker');
+const assistants = conferences.filter((c) => c.role === 'assistant');
+---
+
+<div class="conf">
+  <h3 class="conf__group-title">{roleLabel[lang].speaker}</h3>
+  <ul class="conf__list">
+    {speakers.map((c) => (
+      <li data-audience={c.audience === 'both' ? undefined : c.audience}>
+        <p class="conf__name">
+          {c.url ? <a href={c.url} target="_blank" rel="noopener noreferrer">{c.name[lang]} ↗</a> : c.name[lang]}
+          <span class="conf__year">{c.year}</span>
+        </p>
+        {c.talkTitle && <p class="conf__talk">{c.talkTitle[lang]}</p>}
+      </li>
+    ))}
+  </ul>
+
+  <h3 class="conf__group-title">{roleLabel[lang].assistant}</h3>
+  <ul class="conf__list">
+    {assistants.map((c) => (
+      <li data-audience={c.audience === 'both' ? undefined : c.audience}>
+        <p class="conf__name">
+          {c.url ? <a href={c.url} target="_blank" rel="noopener noreferrer">{c.name[lang]} ↗</a> : c.name[lang]}
+          <span class="conf__year">{c.year}</span>
+        </p>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .conf__group-title {
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-fg-subtle);
+    margin: var(--space-5) 0 var(--space-3);
+  }
+
+  .conf__group-title:first-child {
+    margin-top: 0;
+  }
+
+  .conf__list li {
+    padding-block: var(--space-2);
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .conf__name {
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+
+  .conf__year {
+    font-weight: 400;
+    color: var(--color-fg-subtle);
+    margin-left: var(--space-2);
+  }
+
+  .conf__talk {
+    font-size: var(--text-sm);
+    font-style: italic;
+    color: var(--color-fg-muted);
+    margin-top: 0.15rem;
+  }
+</style>

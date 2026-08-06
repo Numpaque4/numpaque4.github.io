@@ -1,0 +1,93 @@
+---
+import { education } from '../data/education';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<div class="education">
+  <h3 class="education__degree">{education.degree[lang]}</h3>
+  <p class="education__institution">{education.institution[lang]} · {education.location[lang]}</p>
+  <p class="education__dates">{education.startYear} – {education.expectedEnd[lang]}</p>
+
+  {education.honors.length > 0 && (
+    <ul class="education__honors">
+      {education.honors.map((h) => (
+        <li>
+          {h.url ? <a href={h.url} target="_blank" rel="noopener noreferrer">{h.text[lang]} ↗</a> : h.text[lang]}
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <h4 class="education__courses-title">
+    {lang === 'en' ? 'Complementary Courses' : 'Cursos Complementarios'}
+  </h4>
+  <ul class="education__courses">
+    {education.courses.map((c) => (
+      <li>
+        <span class="education__course-title">{c.title[lang]}</span>
+        <span class="education__course-meta">{c.provider[lang]} · {c.year}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .education__degree {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-1);
+  }
+
+  .education__institution {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+
+  .education__dates {
+    color: var(--color-fg-subtle);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-3);
+  }
+
+  .education__honors li {
+    position: relative;
+    padding-left: var(--space-4);
+    margin-bottom: var(--space-2);
+    font-size: var(--text-sm);
+  }
+
+  .education__honors li::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  .education__courses-title {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-fg-subtle);
+    margin-bottom: var(--space-3);
+  }
+
+  .education__courses li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding-block: var(--space-2);
+    border-top: 1px dashed var(--color-border);
+    font-size: var(--text-sm);
+  }
+
+  .education__course-meta {
+    color: var(--color-fg-subtle);
+  }
+</style>

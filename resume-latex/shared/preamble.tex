@@ -1,0 +1,65 @@
+% Shared preamble for all CV variants (academic/industry x en/es).
+% Included via \input from each top-level cv-{mode}-{lang}.tex manifest.
+
+\documentclass[10.5pt,a4paper]{article}
+
+\usepackage[margin=1.6cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+
+\definecolor{accent}{HTML}{243352}
+\definecolor{subtle}{HTML}{55585F}
+\definecolor{lightline}{HTML}{D9D6CF}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=accent,
+    urlcolor=accent,
+    pdfborder={0 0 0},
+}
+
+\titleformat{\section}
+  {\Large\bfseries\color{accent}}
+  {}
+  {0pt}
+  {}
+  [\vspace{2pt}\color{lightline}\titlerule]
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+
+\titleformat{\subsection}
+  {\bfseries\color{black}}
+  {}
+  {0pt}
+  {}
+
+\setlist[itemize]{leftmargin=1.1cm, itemsep=1pt, topsep=2pt}
+\setlist[enumerate]{leftmargin=1.1cm, itemsep=1pt, topsep=2pt}
+
+\newcommand{\cvheader}[2]{
+    \begin{center}
+    {\Huge\bfseries\color{accent} David Sebastián Rodríguez Numpaque}\\[6pt]
+    {\large\color{subtle} #1}\\[14pt]
+    \end{center}
+    \begin{center}
+    \href{mailto:david.rodriguez1@udea.edu.co}{\faEnvelope\hspace{5pt}david.rodriguez1@udea.edu.co} \quad$\cdot$\quad
+    \href{https://github.com/Numpaque4}{\faGithub\hspace{5pt}Numpaque4} \quad$\cdot$\quad
+    \href{https://orcid.org/0009-0000-5697-3416}{\faOrcid\hspace{5pt}0009-0000-5697-3416} \quad$\cdot$\quad
+    \href{https://www.linkedin.com/in/sebastian-numpaque-b257072a6}{\faLinkedin\hspace{5pt}sebastian-numpaque-b257072a6}
+    \end{center}
+    \vspace{10pt}
+    {\color{lightline}\hrule}
+    \vspace{2pt}
+    #2
+}
+
+\pagestyle{empty}

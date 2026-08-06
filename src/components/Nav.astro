@@ -1,0 +1,154 @@
+---
+import { sections } from '../data/sections';
+import { personal } from '../data/personal';
+import type { Lang } from '../i18n/ui';
+import ModeSwitch from './ModeSwitch.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<nav class="site-nav" aria-label="Primary">
+  <div class="site-nav__inner">
+    <a class="site-nav__brand" href="#top">{personal.publicName}</a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox visually-hidden" aria-label="Menu" />
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span class="visually-hidden">Menu</span>
+      <span aria-hidden="true">☰</span>
+    </label>
+
+    <div class="site-nav__panel">
+      <ul class="site-nav__links">
+        {sections.map((s) => (
+          <li data-hide-in-mode={s.hideInMode}><a href={`#${s.id}`}>{s.heading[lang]}</a></li>
+        ))}
+      </ul>
+      <div class="site-nav__controls">
+        <ModeSwitch lang={lang} />
+        <LanguageSwitcher lang={lang} />
+        <ThemeToggle lang={lang} />
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-nav__inner {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: var(--space-3) var(--space-5);
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .site-nav__brand {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    color: var(--color-fg);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav-toggle-label {
+    display: none;
+    margin-left: auto;
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: var(--space-2);
+  }
+
+  .site-nav__panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    gap: var(--space-5);
+    min-width: 0;
+  }
+
+  .site-nav__links {
+    display: flex;
+    gap: var(--space-5);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .site-nav__links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-nav__links a {
+    color: var(--color-fg-muted);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  :root[data-mode='academic'] .site-nav__links li[data-hide-in-mode='academic'],
+  :root[data-mode='industry'] .site-nav__links li[data-hide-in-mode='industry'] {
+    display: none;
+  }
+
+  .site-nav__links a:hover {
+    color: var(--color-accent);
+  }
+
+  .site-nav__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .nav-toggle-label {
+      display: block;
+    }
+
+    .site-nav__panel {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      background: var(--color-bg-raised);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-4) var(--space-5) var(--space-5);
+      box-shadow: var(--shadow-md);
+    }
+
+    .site-nav__links {
+      flex-direction: column;
+      gap: var(--space-3);
+      overflow: visible;
+    }
+
+    .site-nav__controls {
+      margin-top: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .nav-toggle-checkbox:checked ~ .site-nav__panel {
+      display: flex;
+    }
+  }
+</style>

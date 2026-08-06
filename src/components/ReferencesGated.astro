@@ -1,0 +1,58 @@
+---
+import { references } from '../data/references';
+import { personal } from '../data/personal';
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="references" data-audience="academic">
+  <ul class="references__list">
+    {references.map((ref) => (
+      <li>
+        <span class="references__name">{ref.name}</span>
+        <span class="references__title">{ref.title[lang]}</span>
+      </li>
+    ))}
+  </ul>
+  <p class="references__note">
+    {t.referencesNote}
+    {' '}
+    <a href={`mailto:${personal.email}`}>{t.referencesCta} ↗</a>
+  </p>
+</div>
+
+<style>
+  .references__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .references__list li {
+    display: flex;
+    flex-direction: column;
+    padding-block: var(--space-2);
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .references__name {
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+
+  .references__title {
+    font-size: var(--text-sm);
+    color: var(--color-fg-subtle);
+  }
+
+  .references__note {
+    font-size: var(--text-sm);
+    color: var(--color-fg-muted);
+  }
+</style>

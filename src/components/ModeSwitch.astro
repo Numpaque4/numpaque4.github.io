@@ -1,0 +1,68 @@
+---
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="mode-switch" role="group" aria-label={t.modeToggleLabel}>
+  <button type="button" data-mode-value="academic" class="mode-switch__btn" aria-pressed="true">
+    {t.modeAcademic}
+  </button>
+  <button type="button" data-mode-value="industry" class="mode-switch__btn" aria-pressed="false">
+    {t.modeIndustry}
+  </button>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.mode-switch__btn');
+
+  function applyMode(mode: string) {
+    document.documentElement.dataset.mode = mode;
+    try {
+      localStorage.setItem('cv-mode', mode);
+    } catch {}
+    buttons.forEach((btn) => {
+      const active = btn.dataset.modeValue === mode;
+      btn.setAttribute('aria-pressed', String(active));
+    });
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => applyMode(btn.dataset.modeValue!));
+  });
+
+  applyMode(document.documentElement.dataset.mode || 'academic');
+</script>
+
+<style>
+  .mode-switch {
+    display: inline-flex;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .mode-switch__btn {
+    font: inherit;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    padding: 0.35rem 0.85rem;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-fg-muted);
+    cursor: pointer;
+    transition: background var(--duration-fast) var(--easing), color var(--duration-fast) var(--easing);
+  }
+
+  .mode-switch__btn[aria-pressed='true'] {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import EducationBlock from '../components/EducationBlock.astro';
+import EntryCard from '../components/EntryCard.astro';
+import PublicationList from '../components/PublicationList.astro';
+import SkillsGrid from '../components/SkillsGrid.astro';
+import TechnicalExperience from '../components/TechnicalExperience.astro';
+import ConferenceList from '../components/ConferenceList.astro';
+import LanguagesList from '../components/LanguagesList.astro';
+import ReferencesGated from '../components/ReferencesGated.astro';
+import CertificatesGallery from '../components/CertificatesGallery.astro';
+import Footer from '../components/Footer.astro';
+import { sections } from '../data/sections';
+import { experience } from '../data/experience';
+import { personal, aboutMe } from '../data/personal';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const byId = (id: string) => sections.find((s) => s.id === id)!;
+const research = experience.filter((e) => e.category === 'research');
+const outreach = experience.filter((e) => e.category === 'outreach');
+
+const title = `${personal.publicName} — CV`;
+const description = aboutMe[lang];
+---
+
+<BaseLayout lang={lang} title={title} description={description}>
+  <Nav lang={lang} />
+  <Hero lang={lang} />
+
+  <main id="content" class="sections-flow">
+    <Section section={byId('education')} lang={lang}>
+      <EducationBlock lang={lang} />
+    </Section>
+
+    <Section section={byId('research')} lang={lang}>
+      {research.map((entry) => <EntryCard entry={entry} lang={lang} />)}
+    </Section>
+
+    <Section section={byId('publications')} lang={lang}>
+      <PublicationList lang={lang} />
+    </Section>
+
+    <Section section={byId('skills')} lang={lang}>
+      <SkillsGrid lang={lang} />
+    </Section>
+
+    <Section section={byId('technical')} lang={lang}>
+      <TechnicalExperience lang={lang} />
+    </Section>
+
+    <Section section={byId('outreach')} lang={lang}>
+      {outreach.map((entry) => <EntryCard entry={entry} lang={lang} />)}
+    </Section>
+
+    <Section section={byId('conferences')} lang={lang}>
+      <ConferenceList lang={lang} />
+    </Section>
+
+    {/* <Section section={byId('certifications')} lang={lang}>
+      <CertificatesGallery lang={lang} />
+    </Section> */}
+
+    <Section section={byId('languages')} lang={lang}>
+      <LanguagesList lang={lang} />
+    </Section>
+
+    <Section section={byId('references')} lang={lang}>
+      <ReferencesGated lang={lang} />
+    </Section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style is:global>
+  .sections-flow {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

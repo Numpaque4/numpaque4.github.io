@@ -1,0 +1,62 @@
+---
+import { skills } from '../data/skills';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<div class="skills-grid">
+  {skills.map((group) => (
+    <div
+      class="skills-group"
+      style={`--order-academic:${group.weight.academic}; --order-industry:${group.weight.industry};`}
+      data-audience={group.audience === 'both' ? undefined : group.audience}
+    >
+      <h3 class="skills-group__label">{group.label[lang]}</h3>
+      <ul class="skills-group__items">
+        {group.items.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  ))}
+</div>
+
+<style>
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .skills-group {
+    order: var(--order-academic);
+  }
+
+  :root[data-mode='industry'] .skills-group {
+    order: var(--order-industry);
+  }
+
+  .skills-group__label {
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-fg-subtle);
+    margin-bottom: var(--space-3);
+  }
+
+  .skills-group__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .skills-group__items li {
+    font-size: var(--text-sm);
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+  }
+</style>
