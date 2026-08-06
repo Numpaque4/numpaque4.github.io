@@ -11,7 +11,7 @@ Source for my personal CV website, built with [Astro](https://astro.build). It p
 - **LinkedIn**: [sebastian-numpaque-b257072a6](https://www.linkedin.com/in/sebastian-numpaque-b257072a6)
 - **ORCID**: [0009-0000-5697-3416](https://orcid.org/0009-0000-5697-3416)
 
-## Development
+<!-- ## Development
 
 ```sh
 npm install
@@ -50,4 +50,4 @@ Pushes to `main` trigger `.github/workflows/deploy.yml`, which builds the site a
 
 Site content is licensed under [CC BY-SA 4.0](LICENSE). Third-party certificates in `public/certificates/` remain the property of their issuing institutions.
 
-<!-- npm run dev -->
+npm run dev -->
