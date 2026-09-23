@@ -5,7 +5,8 @@ export const education: EducationEntry = {
   institution: { en: 'University of Antioquia', es: 'Universidad de Antioquia' },
   location: { en: 'Medellín, Colombia', es: 'Medellín, Colombia' },
   startYear: 2021,
-  expectedEnd: { en: 'Expected graduation: June 2026', es: 'Graduación esperada: junio de 2026' },
+  // expectedEnd: { en: 'Expected graduation: June 2026', es: 'Graduación esperada: junio de 2026' },
+  expectedEnd: { en: 2026, es: 2026 },
   honors: [
     {
       text: {
