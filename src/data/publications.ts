@@ -4,8 +4,8 @@ export const publications: PublicationEntry[] = [
   {
     id: 'kepler-51-photoring',
     authors: [
-      { name: 'Numpaque, S.', isSelf: true },
       { name: 'Zuluaga, J. I.' },
+      { name: 'Numpaque, S.', isSelf: true },
       { name: 'Alvarado-Montes, J. A.' },
       { name: 'Kipping, D.' },
     ],
@@ -13,10 +13,11 @@ export const publications: PublicationEntry[] = [
       en: 'Probing Exoplanetary Rings with Asterodensity Profiling: A PhotoRing Analysis of Kepler-51',
       es: 'Probing Exoplanetary Rings with Asterodensity Profiling: A PhotoRing Analysis of Kepler-51',
     },
-    venue: { en: 'In preparation', es: 'En preparación' },
+    venue: { en: 'Astronomical Journal', es: 'Astronomical Journal' },
     year: 2026,
-    status: 'in-prep',
+    status: 'submitted',
     type: 'paper',
+    doi: '10.48550/arXiv.2609.25234',
     audience: 'academic',
     weight: { academic: 1, industry: 3 },
   },
